@@ -1,0 +1,32 @@
+pkgname=kiwi-git
+pkgver=r135.33d3a9b
+pkgrel=1
+pkgdesc="Killer Widgets library for SDL2"
+arch=('i686' 'x86_64')
+url="https://github.com/mobius3/KiWi"
+license=('ZLIB')
+depends=('sdl2_ttf' 'sdl2_image')
+makedepends=('cmake' 'git')
+
+provides=('kiwi')
+conflicts=('kiwi')
+
+source=("git+https://github.com/mobius3/KiWi.git")
+md5sums=('SKIP')
+
+pkgver() {
+    cd KiWi
+    printf 'r%s.%s' "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd KiWi
+  cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo
+  make
+}
+
+package() {
+  cd KiWi
+  make DESTDIR="$pkgdir" install
+  install -Dm644 LICENSE "$pkgdir"/usr/share/licenses/$pkgname
+}

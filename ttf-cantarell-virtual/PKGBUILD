@@ -1,0 +1,8 @@
+pkgname=ttf-cantarell-virtual
+pkgver=0
+pkgrel=0
+pkgdesc="A virtual package for the cantarell-fonts package"
+arch=('any')
+license=('custom')
+provides=('cantarell-fonts')
+conflicts=('cantarell-fonts')

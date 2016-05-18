@@ -1,0 +1,8 @@
+pkgname=ttf-dejavu-virtual
+pkgver=0
+pkgrel=0
+pkgdesc="A virtual package for the ttf-dejavu package"
+arch=('any')
+license=('custom')
+provides=('ttf-dejavu')
+conflicts=('ttf-dejavu')

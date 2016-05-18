@@ -1,0 +1,7 @@
+pkgname=ttf-font-virtual
+pkgver=0
+pkgrel=0
+pkgdesc="A virtual package providing ttf-font"
+arch=('any')
+license=('custom')
+provides=('ttf-font')

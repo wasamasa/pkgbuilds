@@ -1,0 +1,24 @@
+pkgname=libcd-bin
+pkgver=5.9
+pkgrel=1
+pkgdesc="Platform-independent graphics library"
+arch=('i686' 'x86_64')
+url="http://www.tecgraf.puc-rio.br/cd/"
+depends=('ftgl' 'libim' 'pdflib-lite' 'gtk3' 'libxmu' 'pangox-compat')
+provides=('libcd')
+conflicts=('libcd' 'cd')
+license=('custom')
+
+source=("http://downloads.sourceforge.net/project/canvasdraw/${pkgver}/Linux%20Libraries/cd-${pkgver}_Linux319_64_lib.tar.gz"
+        LICENSE)
+
+md5sums=('8c1deb47c11330d92d527f70a99e697c'
+         '3b326faf9f9ab35096453525b55bd8c8')
+
+package() {
+  install -m755 -d "$pkgdir"/usr/lib
+  install -m644 "$srcdir"/libcd*.so "$pkgdir"/usr/lib
+  install -m755 -d "$pkgdir"/usr/include
+  install -m644 "$srcdir"/include/* "$pkgdir"/usr/include
+  install -Dm644 "$srcdir"/LICENSE "$pkgdir"/usr/share/licenses/$pkgname
+}

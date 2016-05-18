@@ -1,0 +1,32 @@
+pkgname=stumpwm-git
+pkgver=0.9.8.r133.g9cca096
+pkgrel=1
+pkgdesc="The kitchen sink of window managers."
+url="https://github.com/stumpwm/stumpwm"
+arch=('x86_64' 'i686')
+license=('GPL2')
+depends=('zlib')
+makedepends=('sbcl')
+provides=('stumpwm')
+conflicts=('stumpwm')
+options=(!strip)
+install=stumpwm-git.install
+source=("git://github.com/stumpwm/stumpwm.git")
+md5sums=("SKIP")
+
+pkgver() {
+  cd stumpwm
+  git describe --tags | sed -r 's/([^-]*-g)/r\1/;s/-/./g'
+}
+
+build() {
+  cd stumpwm
+  autoconf
+  ./configure --prefix=/usr --infodir=/usr/share/info --with-lisp=sbcl
+  make stumpwm
+}
+
+package() {
+  cd stumpwm
+  make destdir="$pkgdir" install
+}

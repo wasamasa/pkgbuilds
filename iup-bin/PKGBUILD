@@ -1,0 +1,23 @@
+pkgname=iup-bin
+pkgver=3.18
+pkgrel=1
+pkgdesc="C cross platform GUI toolkit"
+arch=('i686' 'x86_64')
+url="http://www.tecgraf.puc-rio.br/iup/"
+depends=('libcd' 'libim', 'ffcall')
+provides=('iup')
+conflicts=('iup')
+license=('MIT')
+
+source=("http://downloads.sourceforge.net/project/iup/${pkgver}/Linux%20Libraries/iup-${pkgver}_Linux319_64_lib.tar.gz")
+
+md5sums=('8d8895dc51a664c90e2de66efdde0609')
+
+package() {
+  install -m755 -d "$pkgdir"/usr/lib
+  install -m644 libiup*.so "$pkgdir"/usr/lib
+  install -m755 -d "$pkgdir"/usr/include
+  install -m644 include/* "$pkgdir"/usr/include
+  mkdir -p "$pkgdir"/usr/share/licenses/iup
+  install -m644 "$srcdir"/iup/COPYRIGHT "$pkgdir"/usr/share/licenses/iup
+}

@@ -1,0 +1,25 @@
+pkgname=libim-bin
+pkgver=3.10
+pkgrel=1
+pkgdesc="Toolkit for Digital Imaging"
+arch=('i686' 'x86_64')
+url="http://www.tecgraf.puc-rio.br/im/"
+depends=('zlib')
+provides=('libim')
+conflicts=('libim' 'im')
+license=('custom')
+
+source=("http://downloads.sourceforge.net/project/imtoolkit/${pkgver}/Linux%20Libraries/im-${pkgver}_Linux319_64_lib.tar.gz"
+        LICENSE)
+
+md5sums=('c43ade5137265830ec896f7378fd25de'
+         '214b5ab19962418fa755a45b35504219')
+
+package() {
+  install -m755 -d "$pkgdir"/usr/lib
+  install -m644 "$srcdir"/libim*.so "$pkgdir"/usr/lib
+  install -m755 -d "$pkgdir"/usr/include
+  install -m644 "$srcdir"/include/* "$pkgdir"/usr/include
+  mkdir -p "$pkgdir"/usr/share/licenses/libim
+  install -m644 "$srcdir"/LICENSE "$pkgdir"/usr/share/licenses/libim
+}
