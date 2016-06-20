@@ -31,7 +31,7 @@ package() {
   # make DESTDIR="$pkgdir" install
   install -m755 -d "$pkgdir"/usr/lib
   install -m644 out/libui.so.0 "$pkgdir"/usr/lib
-  ln -rsf "$pkgdir"/usr/lib/libui.so.0 "$pkgdir"/usr/lib/libui.so
+  ln -sf /usr/lib/libui.so.0 "$pkgdir"/usr/lib/libui.so
   install -m755 -d "$pkgdir"/usr/include
   install -m644 ui.h "$pkgdir"/usr/include
   install -m644 ui_unix.h "$pkgdir"/usr/include
