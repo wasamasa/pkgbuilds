@@ -39,6 +39,13 @@ Widgets for SDL2.  Packaged because nobody else did.
 
 - ``kiwi-git``
 
+libui
+-----
+
+A GUI toolkit in the spirit of IUP, but built on top of a more recent
+GTK3.  This has been created because the AUR PKGBUILD is out of date
+due to upstream switching to CMake.
+
 StumpWM
 -------
 
