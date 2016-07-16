@@ -1,5 +1,5 @@
 pkgname=ui-git
-pkgver=alpha3.1.r159.gec15e25
+pkgver=alpha3.1.r165.gd93bb2c
 pkgrel=1
 pkgdesc="A portable GUI library for C"
 arch=('i686' 'x86_64')
@@ -35,5 +35,7 @@ package() {
   install -m755 -d "$pkgdir"/usr/include
   install -m644 ui.h "$pkgdir"/usr/include
   install -m644 ui_unix.h "$pkgdir"/usr/include
+  # https://github.com/andlabs/libui/commit/80b8fddbea397a7970532b5ac44c552d90cb3c81
+  install -m644 uitable.h "$pkgdir"/usr/include
   install -Dm644 LICENSE "$pkgdir"/usr/share/licenses/"$pkgname"/LICENSE
 }
