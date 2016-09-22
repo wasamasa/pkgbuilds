@@ -19,5 +19,5 @@ package() {
   install -m755 -d "$pkgdir"/usr/include
   install -m644 include/* "$pkgdir"/usr/include
   mkdir -p "$pkgdir"/usr/share/licenses/iup
-  install -m644 "$srcdir"/iup/COPYRIGHT "$pkgdir"/usr/share/licenses/iup
+  install -m644 "$srcdir"/COPYRIGHT "$pkgdir"/usr/share/licenses/iup
 }
