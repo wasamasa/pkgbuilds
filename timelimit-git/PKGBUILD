@@ -1,0 +1,30 @@
+pkgname=timelimit-git
+pkgver=r72.38cea48
+pkgrel=1
+pkgdesc='Limit the runtime of a program'
+url='https://devel.ringlet.net/sysutils/timelimit/'
+arch=('i686' 'x86_64')
+license=('BSD')
+depends=()
+
+provides=('timelimit')
+conflicts=('timelimit')
+
+source=("git+https://gitlab.com/timelimit/timelimit.git" "LICENSE")
+md5sums=('SKIP' '354cdda4c686bb71ae5933eb6e09ded6')
+
+pkgver() {
+  cd timelimit
+  printf 'r%s.%s' "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd timelimit
+  make
+}
+
+package() {
+  cd timelimit
+  make PREFIX=/usr DESTDIR="$pkgdir" install
+  install -Dm644 "$srcdir"/LICENSE "$pkgdir"/usr/share/licenses/$pkgname
+}
