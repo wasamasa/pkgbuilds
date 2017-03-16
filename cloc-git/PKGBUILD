@@ -1,0 +1,24 @@
+pkgname=cloc-git
+pkgver=v1.72.r28.g7ccc4b6
+pkgrel=1
+pkgdesc="Count Lines of Code"
+url='https://github.com/AlDanial/cloc'
+arch=('any')
+license=('GPL')
+depends=('perl' 'perl-algorithm-diff' 'perl-regexp-common')
+
+provides=('cloc')
+conflicts=('cloc')
+
+source=("git+https://github.com/AlDanial/cloc.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd cloc
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+package() {
+  cd cloc/Unix
+  make DESTDIR="$pkgdir" install
+}
