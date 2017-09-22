@@ -1,0 +1,28 @@
+pkgname="java-jline3"
+pkgver=3.3.1
+pkgrel=1
+pkgdesc="Java library for handling console input"
+arch=('any')
+url="https://github.com/jline/jline3"
+license=('BSD')
+depends=('java-runtime')
+makedepends=('maven')
+checkdepends=('maven')
+provides=('java-jline3')
+conflicts=('java-jline3')
+source=("https://github.com/jline/jline3/archive/jline-3.3.1.tar.gz")
+md5sums=('SKIP')
+_M2_REPO=$(mktemp -d)
+
+build() {
+  cd jline3-jline-$pkgver
+  mvn -Dmaven.repo.local=${_M2_REPO} -Dmaven.test.skip=true install
+}
+
+package() {
+  cd jline3-jline-$pkgver
+  install -Dm644 jline/target/jline-$pkgver.jar \
+    "${pkgdir}"/usr/share/java/jline3-"${pkgver}".jar
+  ln -s jline3-"${pkgver}".jar "${pkgdir}"/usr/share/java/jline3.jar
+  install -Dm 644 LICENSE.txt "${pkgdir}"/usr/share/licenses/java-jline3/LICENSE
+}
