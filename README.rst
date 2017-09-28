@@ -53,3 +53,20 @@ I blame Lisp mysticism for getting the better for me.  This PKGBUILD
 assumes you've installed the dependencies via Quicklisp already.
 
 - ``stumpwm-git``
+
+timelimit
+---------
+
+Not packaged yet.  I realized later that ``timeout`` is a thing
+already, so there's probably no need for anyone to install this one.
+
+cloc
+----
+
+For some reason there's only a SVN version of this package on the AUR.
+
+Kawa
+----
+
+Alternative version of the existing git package that makes use of the
+JLine3 library.
