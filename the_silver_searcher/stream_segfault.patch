@@ -1,0 +1,13 @@
+--- a/search.c	2017-10-19 09:58:03.047699012 +0200
++++ b/search.c	2017-10-19 09:59:08.222540889 +0200
+@@ -360,6 +360,10 @@ void search_file(const char *file_full_p
+ #if HAVE_FOPENCOOKIE
+             log_debug("%s is a compressed file. stream searching", file_full_path);
+             fp = decompress_open(fd, "r", zip_type);
++            if (fp == NULL) {
++                log_err("Cannot decompress zipped file %s", file_full_path);
++                goto cleanup;
++            }
+             search_stream(fp, file_full_path);
+             fclose(fp);
+ #else

@@ -70,3 +70,14 @@ Kawa
 
 Alternative version of the existing git package that makes use of the
 JLine3 library.
+
+the_silver_searcher
+-------------------
+
+The new stable release broke search in compressed files and upstream
+doesn't respond to MRs, so I added patches to the official PKGBUILD.
+
+red-git
+-------
+
+Necessary for bug reports.

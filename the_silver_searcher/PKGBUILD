@@ -1,0 +1,38 @@
+# Maintainer: Alexander F Rødseth <xyproto@archlinux.org>
+# Contributor: Jeff Horelick <jdhore1@gmail.com>
+# Contributor: skydrome <skydrome@i2pmail.org>
+
+pkgname=the_silver_searcher
+pkgver=2.1.0
+pkgrel=1
+pkgdesc='Code searching tool similar to Ack, but faster'
+arch=('x86_64' 'i686')
+url='https://github.com/ggreer/the_silver_searcher'
+license=('Apache')
+depends=('pcre' 'xz')
+makedepends=('git')
+source=("git+https://github.com/ggreer/$pkgname.git#tag=$pkgver"
+       "stream_segfault.patch"
+       "truncated_file.patch")
+md5sums=('SKIP'
+        'b250c851e9ea59e59d18efe3b172ff94'
+        '43dcddfec6f530caf9998f782ebe1f12')
+
+prepare() {
+  sed -i 's_configure_configure --prefix=/usr_' $pkgname/build.sh
+  cd $pkgname
+  patch -Np1 -d src -i "$srcdir"/stream_segfault.patch
+  patch -Np1 -d src -i "$srcdir"/truncated_file.patch
+}
+
+build() {
+  cd $pkgname
+  ./build.sh
+}
+
+package() {
+  cd $pkgname
+  make DESTDIR="$pkgdir" install
+}
+
+# vim:ts=2 sw=2 et:

@@ -1,0 +1,17 @@
+--- a/zfile.c	2017-10-19 09:58:03.047699012 +0200
++++ b/zfile.c	2017-10-19 09:59:42.073325019 +0200
+@@ -284,11 +284,11 @@ zfile_read(void *cookie_, char *buf, siz
+                        cookie->in);
+             if (ferror(cookie->in)) {
+                 warn("error read core");
+-                exit(1);
++                return -1;
+             }
+-            if (nb == 0 && feof(cookie->in)) {
++            if (nb == 0 && !feof(cookie->in)) {
+                 warn("truncated file");
+-                exit(1);
++                return -1;
+             }
+             if (cookie->ctype == AG_XZ) {
+                 cookie->stream.lzma.avail_in = nb;
