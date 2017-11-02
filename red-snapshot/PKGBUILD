@@ -1,0 +1,28 @@
+pkgname=red-snapshot
+pkgver=02nov17.a4b41f6
+pkgrel=1
+pkgdesc="An open source, native code compiled, dialect of Rebol"
+arch=('i686' 'x86_64')
+url="http://www.red-lang.org"
+license=('custom:3-clause BSD' 'custom:BSL')
+groups=('devel')
+depends=('lib32-curl')
+provides=('red')
+conflicts=('ed' 'red')
+source=("http://static.red-lang.org/dl/auto/linux/red-latest"
+        "https://raw.githubusercontent.com/red/red/master/BSD-3-License.txt"
+        "https://raw.githubusercontent.com/red/red/master/BSL-License.txt")
+options=('!strip' 'staticlibs')
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP')
+
+pkgver() {
+  curl -sI http://static.red-lang.org/dl/auto/linux/red-latest | grep filename | cut -d\" -f2 | sed -e 's/red-//' -e 's/-/./'
+}
+
+package() {
+  install -Dm755 red-latest "$pkgdir"/usr/bin/red
+  install -Dm644 BSD-3-License.txt "$pkgdir"/usr/share/licenses/$pkgname/BSD-3-License.txt
+  install -Dm644 BSL-License.txt "$pkgdir"/usr/share/licenses/$pkgname/BSL-License.txt
+}
