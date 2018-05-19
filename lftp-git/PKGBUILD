@@ -1,0 +1,38 @@
+pkgname=lftp-git
+pkgver=v4.8.2.r2.g0dbef1a2
+pkgrel=1
+pkgdesc="Sophisticated command line based FTP client"
+arch=('i686' 'x86_64')
+license=('GPL3')
+depends=('gcc-libs' 'readline' 'gnutls' 'libidn' 'expat' 'sh' 'hicolor-icon-theme')
+optdepends=('perl: needed for convert-netscape-cookies and verify-file')
+url="https://lftp.yar.ru/"
+backup=('etc/lftp.conf')
+conflicts=('lftp')
+replaces=('lftp')
+provides=('lftp')
+source=('git+https://github.com/lavv17/lftp.git'
+        'git://git.sv.gnu.org/gnulib')
+sha256sums=('SKIP' 'SKIP')
+
+pkgver() {
+  cd lftp
+  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd lftp
+  export PATH="$srcdir"/gnulib:$PATH
+  ./autogen.sh --prefix=/usr \
+    --with-gnutls \
+    --without-openssl \
+    --without-included-regex \
+    --disable-static
+  make
+}
+
+package() {
+  cd lftp
+  make DESTDIR=${pkgdir} install
+  rm -rf ${pkgdir}/usr/lib
+}
