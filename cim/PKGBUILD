@@ -1,0 +1,27 @@
+pkgname=cim
+pkgver=3.37
+pkgrel=1
+epoch=
+pkgdesc="GNU implementation of the Simula programming language"
+arch=(any)
+url="https://www.gnu.org/software/cim/"
+license=('GPL')
+depends=()
+makedepends=('autoconf' 'automake' 'libtool')
+provides=('cim')
+conflicts=('cim')
+replaces=('cim')
+source=("http://folk.uio.no/simula67/Cim/$pkgname-$pkgver.tar.gz")
+md5sums=('b51068ab30f54aefeb86fc4a6289cc77')
+
+build() {
+    cd "$pkgname-$pkgver"
+    autoreconf -fi
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    cd "$pkgname-$pkgver"
+    make DESTDIR="$pkgdir/" install
+}
