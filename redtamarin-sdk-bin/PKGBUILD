@@ -1,0 +1,31 @@
+pkgname=redtamarin-sdk-bin
+pkgver=0.4.1
+pkgrel=1
+pkgdesc="CLI-oriented ActionScript 3 SDK"
+arch=('x86_64')
+url="http://redtamarin.com/"
+license=('MPL')
+depends=('java-runtime')
+provides=('redtamarin-sdk')
+conflicts=('redtamarin-sdk')
+replaces=('redtamarin-sdk')
+source=("https://github.com/Corsaair/redtamarin/releases/download/$pkgver/redtamarin-sdk_$pkgver-1_amd64.deb")
+md5sums=('dfb3404b1dde51c7201f7ff061dfbd19')
+
+prepare() {
+    tar -xf data.tar.xz -C "$srcdir"
+}
+
+package() {
+    install -dm 755 "$pkgdir/usr/bin/"
+    install -dm 755 "$pkgdir/usr/lib/"
+    install -dm 755 "$pkgdir/usr/share/"
+
+    cp -r "$srcdir/usr/lib" "$pkgdir/usr"
+    cp -r "$srcdir/usr/share" "$pkgdir/usr"
+    ln -sf /usr/lib/redtamarin/bin/redbean "$pkgdir/usr/bin/redbean"
+    ln -sf /usr/lib/redtamarin/runtimes/redshell/linux/64/redshell "$pkgdir/usr/bin/redshell"
+    ln -sf /usr/lib/redtamarin/runtimes/redshell/linux/64/redshell_d "$pkgdir/usr/bin/redshell_d"
+    ln -sf /usr/lib/redtamarin/runtimes/redshell/linux/64/redshell_dd "$pkgdir/usr/bin/redshell_dd"
+    ln -sf /usr/lib/redtamarin/bin/redtamarin "$pkgdir/usr/bin/redtamarin"
+}
