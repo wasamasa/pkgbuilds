@@ -11,8 +11,15 @@ makedepends=('autoconf' 'automake' 'libtool')
 provides=('cim')
 conflicts=('cim')
 replaces=('cim')
-source=("http://folk.uio.no/simula67/Cim/$pkgname-$pkgver.tar.gz")
-md5sums=('b51068ab30f54aefeb86fc4a6289cc77')
+source=("http://folk.uio.no/simula67/Cim/$pkgname-$pkgver.tar.gz"
+        "incorrect_tag_usage.patch")
+md5sums=('b51068ab30f54aefeb86fc4a6289cc77'
+         'df7495697445c9327e8fe15e68f1d0a6')
+
+prepare() {
+    cd "$pkgname-$pkgver"
+    patch -p1 < "$srcdir"/incorrect_tag_usage.patch
+}
 
 build() {
     cd "$pkgname-$pkgver"

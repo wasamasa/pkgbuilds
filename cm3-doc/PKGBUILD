@@ -1,0 +1,14 @@
+pkgname=cm3-doc
+pkgver=5.8.6
+pkgrel=1
+pkgdesc="Critical Mass Modula-3 HTML documentation"
+arch=(any)
+url="http://www.opencm3.net/"
+license=('custom')
+source=("https://modula3.elegosoft.com/cm3/releng/$pkgname-$pkgver-REL.tgz")
+md5sums=('57a1354eaee426e54276af151a836ad9')
+
+package() {
+    install -d -m755 "$pkgdir"/usr/local/cm3
+    cp -R doc "$pkgdir"/usr/local/cm3
+}

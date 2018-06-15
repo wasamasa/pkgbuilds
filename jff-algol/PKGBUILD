@@ -1,0 +1,27 @@
+pkgname=jff-algol
+pkgver=2.1
+pkgrel=1
+epoch=
+pkgdesc="ALGOL-60 compiler"
+arch=(any)
+url="https://github.com/JvanKatwijk/algol-60-compiler"
+license=('GPL')
+depends=()
+makedepends=('ocaml' 'python2')
+provides=('awe')
+conflicts=('awe')
+replaces=('awe')
+source=("http://algol60.org/translators/algol-60-compiler.zip")
+md5sums=('3c72f088d9d64cff6a7ae314d10f4184')
+
+build() {
+    cd algol-60-compiler
+    # autoreconf -fi
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    cd algol-60-compiler
+    make DESTDIR="$pkgdir/" install
+}

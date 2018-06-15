@@ -1,0 +1,80 @@
+From c62518a799806fa4a59eff817a2509d193097e31 Mon Sep 17 00:00:00 2001
+From: Vasilij Schneidermann <mail@vasilij.de>
+Date: Fri, 8 Jun 2018 12:26:56 +0200
+Subject: [PATCH] Update to latest OCaml API
+
+---
+ awe.ml      | 2 +-
+ compiler.ml | 6 +++---
+ dynArray.ml | 4 ++--
+ table.ml    | 2 +-
+ 4 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/awe.ml b/awe.ml
+index 1de2688..ad1771c 100644
+--- a/awe.ml
++++ b/awe.ml
+@@ -57,7 +57,7 @@ let multi_file_lexbuf (sources : string list) : Lexing.lexbuf =
+         in
+         let channel = ref (open_source first) in
+         let remaining = ref rest in
+-        let rec lexbuf_reader (buffer : string) (n_requested : int) : int =
++        let rec lexbuf_reader (buffer : bytes) (n_requested : int) : int =
+           let n = input !channel buffer 0 n_requested in
+           if n > 0 then 
+             n 
+diff --git a/compiler.ml b/compiler.ml
+index 634dd8b..e9d0f5a 100644
+--- a/compiler.ml
++++ b/compiler.ml
+@@ -290,9 +290,9 @@ let is_valid_c_identifier s =   (* true if 's' is a valid GCC C identifier. *)
+ (* 'blank_string n' return a C string constant containing n spaces *)
+ 
+ let blank_string (n : int) : Code.t =
+-  let s = String.create n in
+-  String.fill s 0 n ' ' ;
+-  Code.string ("(_awe_str)\"" ^ s ^ "\"")
++  let b = Bytes.create n in
++  Bytes.fill b 0 n ' ' ;
++  Code.string ("(_awe_str)\"" ^ Bytes.to_string b ^ "\"")
+ 
+ 
+ let code_of_int  (i : int) : Code.t = Code.string (string_of_int i)
+diff --git a/dynArray.ml b/dynArray.ml
+index 9157d4f..8ca464d 100644
+--- a/dynArray.ml
++++ b/dynArray.ml
+@@ -29,7 +29,7 @@ let initial_size = 20
+ 
+ let create filler =
+   { length = 0;
+-    arr = Array.create initial_size filler;
++    arr = Array.make initial_size filler;
+     filler = filler }
+ 
+ let get a i  =  Array.get a.arr i
+@@ -37,7 +37,7 @@ let get a i  =  Array.get a.arr i
+ let add a element =
+   let len = Array.length a.arr in
+   if len = a.length then
+-    a.arr <- Array.append a.arr (Array.create len a.filler) ; (* double the array length *)
++    a.arr <- Array.append a.arr (Array.make len a.filler) ; (* double the array length *)
+   Array.set a.arr a.length element ;
+   a.length <- a.length + 1
+ 
+diff --git a/table.ml b/table.ml
+index 13503cb..418dc32 100644
+--- a/table.ml
++++ b/table.ml
+@@ -47,7 +47,7 @@ module Id = struct
+   let string2id : (string, int) Hashtbl.t = Hashtbl.create 83
+ 
+   let create (str : string) : t =
+-    let str = String.lowercase str in
++    let str = String.lowercase_ascii str in
+     let str = if (Hashtbl.mem gnuc_keywords str) then (str ^ "_") else str in
+     try
+       Hashtbl.find string2id str
+-- 
+2.17.0
+

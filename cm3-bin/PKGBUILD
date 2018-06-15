@@ -1,0 +1,22 @@
+pkgname=cm3-bin
+pkgver=5.8.6
+pkgrel=1
+epoch=
+pkgdesc="Critical Mass Modula-3 compiler"
+arch=('any')
+url="http://www.opencm3.net/"
+license=('custom')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=('cm3')
+conflicts=('cm3')
+replaces=('cm3')
+source=("http://www.opencm3.net/releng/$pkgname-core-AMD64_LINUX-$pkgver-REL.tgz")
+md5sums=('5e7b72e829ea128d0b07518fce57e6ec')
+
+package() {
+    ./cminstall "$pkgdir"/usr/local/cm3
+}

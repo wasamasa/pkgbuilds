@@ -1,0 +1,76 @@
+From 41bd609265679b6d7edfc3ff52631a0ee0c9fb5b Mon Sep 17 00:00:00 2001
+From: Vasilij Schneidermann <mail@vasilij.de>
+Date: Thu, 14 Jun 2018 21:12:16 +0200
+Subject: [PATCH] Include string.h header
+
+---
+ src/aikido.h       | 1 +
+ src/mkelf.cc       | 1 +
+ src/terminal.cc    | 1 +
+ src/unix/driver.cc | 1 +
+ src/zip.cc         | 1 +
+ 6 files changed, 6 insertions(+)
+
+diff --git a/src/aikido.h b/src/aikido.h
+index a9f1d0d..adc3d90 100644
+--- a/src/aikido.h
++++ b/src/aikido.h
+@@ -103,6 +103,7 @@
+ 
+ #include "aikidotoken.h"
+ #include <stdio.h>
++#include <string.h>
+ #include <stdlib.h>
+ #include <stdarg.h>
+ #include <stack>
+diff --git a/src/mkelf.cc b/src/mkelf.cc
+index 4b70032..28b9e69 100644
+--- a/src/mkelf.cc
++++ b/src/mkelf.cc
+@@ -1,6 +1,7 @@
+ #include <iostream>
+ #include <fstream>
+ #include <stdio.h>
++#include <string.h>
+ #include <unistd.h>
+ #include <sys/stat.h>
+ #include <vector>
+diff --git a/src/terminal.cc b/src/terminal.cc
+index 7d00b52..8fef59a 100644
+--- a/src/terminal.cc
++++ b/src/terminal.cc
+@@ -2,6 +2,7 @@
+ 
+ #include <sys/ioctl.h>
+ #include <stdio.h>
++#include <string.h>
+ #include <unistd.h>
+ #include <stdarg.h>
+ 
+diff --git a/src/unix/driver.cc b/src/unix/driver.cc
+index 08d3761..fc7f4dc 100644
+--- a/src/unix/driver.cc
++++ b/src/unix/driver.cc
+@@ -42,6 +42,7 @@
+ #endif
+ #include <iostream>
+ #include <stdio.h>
++#include <string.h>
+ 
+ const char *legal_notice = "Copyright (C) 2003 Sun Microsystems, Inc., 4150 Network Circle, Santa Clara, California 95054, U.S.A. "
+         "All rights reserved.  U.S. Government Rights - Commercial software.  Government users are subject to the Sun Microsystems, "
+diff --git a/src/zip.cc b/src/zip.cc
+index c990177..26e3bb5 100644
+--- a/src/zip.cc
++++ b/src/zip.cc
+@@ -28,6 +28,7 @@
+ 
+ #include "aikidozip.h"
+ #include <stdlib.h>
++#include <string.h>
+ 
+ 
+ namespace zip {
+-- 
+2.17.1
+

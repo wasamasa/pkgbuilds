@@ -1,0 +1,37 @@
+pkgname=awe
+pkgver=20120801
+pkgrel=1
+epoch=
+pkgdesc="ALGOL W compiler"
+arch=(any)
+url="https://tiddly-pom.com/~glyn/"
+license=('GPL')
+depends=()
+makedepends=('ocaml' 'python2')
+provides=('awe')
+conflicts=('awe')
+replaces=('awe')
+source=("https://tiddly-pom.com/~glyn/awe.tar.gz"
+        "0001-Update-to-latest-OCaml-API.patch"
+        "0001-Use-python2.patch")
+md5sums=('85fae19307e74cee5e3506219c7849bc'
+         '327f02815cafedd6af9875b89456f968'
+         'f743b40577d169e18d65dcb14907f24c')
+options=('!buildflags')
+
+prepare() {
+    cd "$pkgname"
+    patch -p1 < "$srcdir"/0001-Update-to-latest-OCaml-API.patch
+    patch -p1 < "$srcdir"/0001-Use-python2.patch
+}
+
+build() {
+    cd "$pkgname"
+    sed -i 's_$(DESTDIR)/usr/local_$(DESTDIR)/usr_' Makefile
+    make
+}
+
+package() {
+    cd "$pkgname"
+    make DESTDIR="$pkgdir/" install
+}

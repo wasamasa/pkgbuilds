@@ -1,0 +1,36 @@
+pkgname=aikido
+pkgver=1.40
+pkgrel=1
+epoch=
+pkgdesc="Aikido Language System"
+arch=('any')
+url="https://sourceforge.net/projects/aikido/"
+license=('GPL')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+source=("https://downloads.sourceforge.net/$pkgname/$pkgname-${pkgver}_src.zip"
+        "0001-Include-string.h-header.patch")
+md5sums=('8aefc9131aecaef0f265c6cd8b9b2165'
+         '20333f0fd7ceaf5364879acf7c3aee5f')
+
+prepare() {
+	cd "$pkgname-$pkgver"
+	patch -p1 < "$srcdir"/0001-Include-string.h-header.patch
+}
+
+build() {
+	cd "$pkgname-$pkgver"
+	./configure --prefix=/usr
+	make
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+	make dest="$pkgdir/usr" install
+}

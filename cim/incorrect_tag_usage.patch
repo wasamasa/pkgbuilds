@@ -1,0 +1,11 @@
+--- a/src/mapline.c	2018-05-20 01:32:05.563450711 +0200
++++ b/src/mapline.c	2018-05-20 01:32:14.756801496 +0200
+@@ -65,7 +65,7 @@ int maplineInit (sourcename, ifdefp) cha
+   obstack_init (&osMap);
+   obstack_init (&osMapstack);
+   mapinit.filename="";
+-  return pushfilmap (tag (sourcename), ifdefp);
++  return pushfilmap (sourcename, ifdefp);
+ }
+ 
+ 
