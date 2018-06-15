@@ -77,7 +77,17 @@ the_silver_searcher
 The new stable release broke search in compressed files and upstream
 doesn't respond to MRs, so I added patches to the official PKGBUILD.
 
-red-git
--------
+Ancient and obscure programming language implementations
+--------------------------------------------------------
 
-Necessary for bug reports.
+I'm always looking out for candidates to implement `MAL
+<https://github.com/kanaka/mal>`_ in.
+
+- ``aikido``
+- ``awe``
+- ``cim``
+- ``cm3-bin``
+- ``cm3-doc``
+- ``jff-algol``
+- ``red-snapshot``
+- ``redtamarin-sdk-bin``
