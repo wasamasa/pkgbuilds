@@ -1,0 +1,35 @@
+pkgname=chapel
+pkgver=1.17.1
+pkgrel=1
+epoch=
+pkgdesc="Cray's Chapel compiler"
+arch=(any)
+url="https://chapel-lang.org/"
+license=('GPL')
+depends=('gmp' 'libunwind')
+makedepends=('perl' 'python')
+optdepends=('python-setuptools')
+provides=('chapel')
+conflicts=('chapel')
+replaces=('chapel')
+source=("https://github.com/chapel-lang/$pkgname/archive/$pkgver.tar.gz")
+options=('libtool')
+md5sums=('3790e3b6026f88b32ffd97acc6d804bb')
+
+build() {
+    cd "$pkgname-$pkgver"
+    source util/setchplenv.bash
+    CHPL_GMP=system CHPL_REGEXP=re2 CHPL_UNWIND=system ./configure --prefix=/usr
+    make
+}
+
+check() {
+    cd "$pkgname-$pkgver"
+    source util/setchplenv.bash
+    make -k check
+}
+
+package() {
+    cd "$pkgname-$pkgver"
+    make DESTDIR="$pkgdir/" install
+}

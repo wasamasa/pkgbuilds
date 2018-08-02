@@ -1,5 +1,5 @@
 pkgname=red-snapshot
-pkgver=02nov17.a4b41f6
+pkgver=24jul18.f77e751a
 pkgrel=1
 pkgdesc="An open source, native code compiled, dialect of Rebol"
 arch=('i686' 'x86_64')
@@ -18,7 +18,7 @@ sha256sums=('SKIP'
             'SKIP')
 
 pkgver() {
-  curl -sI http://static.red-lang.org/dl/auto/linux/red-latest | grep filename | cut -d\" -f2 | sed -e 's/red-//' -e 's/-/./'
+  curl -sI https://static.red-lang.org/dl/auto/linux/red-latest | grep filename | cut -d\" -f2 | sed -e 's/red-//' -e 's/-/./'
 }
 
 package() {
